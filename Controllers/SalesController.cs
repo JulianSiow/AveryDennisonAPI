@@ -9,50 +9,50 @@ using AveryDennisonAPI.Models;
 
 namespace AveryDennisonAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Sales")]
     [ApiController]
-    public class ArticlesController : ControllerBase
+    public class SalesController : ControllerBase
     {
-        private readonly ArticleContext _context;
+        private readonly SaleContext _context;
 
-        public ArticlesController(ArticleContext context)
+        public SalesController(SaleContext context)
         {
             _context = context;
         }
 
-        // GET: api/Articles
+        // GET: api/Sales
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
+        public async Task<ActionResult<IEnumerable<Sale>>> GetSales()
         {
-            return await _context.Articles.ToListAsync();
+            return await _context.Sales.ToListAsync();
         }
 
-        // GET: api/Articles/5
+        // GET: api/Sales/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Article>> GetArticle(long id)
+        public async Task<ActionResult<Sale>> GetSale(long id)
         {
-            var article = await _context.Articles.FindAsync(id);
+            var sale = await _context.Sales.FindAsync(id);
 
-            if (article == null)
+            if (sale == null)
             {
                 return NotFound();
             }
 
-            return article;
+            return sale;
         }
 
-        // PUT: api/Articles/5
+        // PUT: api/Sales/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutArticle(long id, Article article)
+        public async Task<IActionResult> PutSale(long id, Sale sale)
         {
-            if (id != article.Id)
+            if (id != sale.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(article).State = EntityState.Modified;
+            _context.Entry(sale).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AveryDennisonAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ArticleExists(id))
+                if (!SaleExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace AveryDennisonAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Articles
+        // POST: api/Sales
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Article>> PostArticle(Article article)
+        public async Task<ActionResult<Sale>> PostSale(Sale sale)
         {
-            _context.Articles.Add(article);
+            _context.Sales.Add(sale);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetArticle), new { id = article.Id }, article);
+            return CreatedAtAction(nameof(GetSale), new { id = sale.Id }, sale);
         }
 
-        // DELETE: api/Articles/5
+        // DELETE: api/Sales/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Article>> DeleteArticle(long id)
+        public async Task<ActionResult<Sale>> DeleteSale(long id)
         {
-            var article = await _context.Articles.FindAsync(id);
-            if (article == null)
+            var sale = await _context.Sales.FindAsync(id);
+            if (sale == null)
             {
                 return NotFound();
             }
 
-            _context.Articles.Remove(article);
+            _context.Sales.Remove(sale);
             await _context.SaveChangesAsync();
 
-            return article;
+            return sale;
         }
 
-        private bool ArticleExists(long id)
+        private bool SaleExists(long id)
         {
-            return _context.Articles.Any(e => e.Id == id);
+            return _context.Sales.Any(e => e.Id == id);
         }
     }
 }

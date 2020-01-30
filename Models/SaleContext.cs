@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AveryDennisonAPI.Models
 {
-    public class ArticleContext : DbContext
+    public class SaleContext : DbContext
     {
-        public ArticleContext(DbContextOptions<ArticleContext> options)
+        public SaleContext(DbContextOptions<SaleContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Article> Articles { get; set; }
+        public DbSet<Sale> Sales { get; set; }
     }
 }
