@@ -41,6 +41,28 @@ namespace AveryDennisonAPI.Controllers
             return sale;
         }
 
+        // GET: api/Sales/byNumber/article1
+        [HttpGet("byNumber/{articleNumber}")]
+        public async Task<ActionResult<IEnumerable<Sale>>> GetSales(string articleNumber)
+        {
+            var saleList = await _context.Sales.ToListAsync();
+
+            var filteredSales = saleList.Where(sale => sale.ArticleNumber == articleNumber).ToList();
+
+            return filteredSales;
+        }
+
+        // GET: api/Sales/byDate/00-00-0000
+        [HttpGet("byDate/{date}")]
+        public async Task<ActionResult<IEnumerable<Sale>>> GetSales(DateTime date)
+        {
+            var saleList = await _context.Sales.ToListAsync();
+
+            var filteredSales = saleList.Where(sale => sale.Date == date).ToList();
+
+            return filteredSales;
+        }
+
         // PUT: api/Sales/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
