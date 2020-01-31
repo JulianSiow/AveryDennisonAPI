@@ -42,25 +42,52 @@ namespace AveryDennisonAPI.Controllers
         }
 
         // GET: api/Sales/byNumber/article1
-        [HttpGet("byNumber/{articleNumber}")]
-        public async Task<ActionResult<IEnumerable<Sale>>> GetSales(string articleNumber)
+        [HttpGet("revenueByArticle/{articleNumber}")]
+        public async Task<ActionResult<double>> GetSales(string articleNumber)
         {
             var saleList = await _context.Sales.ToListAsync();
 
             var filteredSales = saleList.Where(sale => sale.ArticleNumber == articleNumber).ToList();
 
-            return filteredSales;
+            var articleRev = 0.0;
+
+            foreach (Sale sale in filteredSales)
+            {
+                articleRev += sale.SalesPrice;
+            }
+
+            return articleRev;
         }
 
-        // GET: api/Sales/byDate/00-00-0000
-        [HttpGet("byDate/{date}")]
-        public async Task<ActionResult<IEnumerable<Sale>>> GetSales(DateTime date)
+        // GET: api/Sales/revenueByDate/00-00-0000
+        [HttpGet("revenueByDate/{date}")]
+        public async Task<ActionResult<double>> GetSales(DateTime date)
         {
             var saleList = await _context.Sales.ToListAsync();
 
             var filteredSales = saleList.Where(sale => sale.Date == date).ToList();
 
-            return filteredSales;
+            var daysRev = 0.0;
+
+            foreach(Sale sale in filteredSales)
+            {
+                daysRev += sale.SalesPrice;
+            }
+
+            return daysRev;
+        }
+
+        // GET: api/Sales/byDate/00-00-0000
+        [HttpGet("salesByDate/{date}")]
+        public async Task<int> GetNumberOfSales(DateTime date)
+        {
+            var saleList = await _context.Sales.ToListAsync();
+
+            var filteredSales = saleList.Where(sale => sale.Date == date).ToList();
+
+            var daysSales = saleList.Count;
+
+            return daysSales;
         }
 
         // PUT: api/Sales/5
