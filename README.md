@@ -48,7 +48,17 @@ To find revenue by date, send a GET request to:
 ```
 which will respond with the total revenue of that given day.  This will not respond with any data about sales on that date.  
 
+To find all revenue grouped by article number, send a GET request to:
+```https://localhost:{PORT}/api/Sales/revenueByArticle/{ArticleNumber}
+```
+which will respond with a list of articles and their respective revenues.  
+
 To find revenue by article number, send a GET request to:
 ```https://localhost:{PORT}/api/Sales/revenueByArticle/{ArticleNumber}
 ```
 which will respond with the total revenue of that article.
+
+## Existing Issues
+
+- Responses vary wildly, I would like to normalize them with a response object.  
+- Getting revenue sorted by articles requires two O(n^2) functions, requires more work for higher efficiency.
