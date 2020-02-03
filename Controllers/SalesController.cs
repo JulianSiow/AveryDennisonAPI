@@ -27,6 +27,15 @@ namespace AveryDennisonAPI.Controllers
             return await _context.Sales.ToListAsync();
         }
 
+        // GET: api/Sales/revenueByArticle
+        [HttpGet("revenueByArticle")]
+        public async Task<ActionResult<IEnumerable<Sale>>> GetSalesByArticle()
+        {
+            var allSales = await _context.Sales.ToListAsync();
+
+            
+        }
+
         // GET: api/Sales/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Sale>> GetSale(long id)
@@ -41,7 +50,7 @@ namespace AveryDennisonAPI.Controllers
             return sale;
         }
 
-        // GET: api/Sales/byNumber/article1
+        // GET: api/Sales/revenueByArticle/article1
         [HttpGet("revenueByArticle/{articleNumber}")]
         public async Task<ActionResult<double>> GetSales(string articleNumber)
         {
@@ -91,8 +100,6 @@ namespace AveryDennisonAPI.Controllers
         }
 
         // PUT: api/Sales/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSale(long id, Sale sale)
         {
@@ -123,8 +130,6 @@ namespace AveryDennisonAPI.Controllers
         }
 
         // POST: api/Sales
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Sale>> PostSale(Sale sale)
         {
