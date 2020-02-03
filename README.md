@@ -29,33 +29,28 @@ and will respond with the created object.
 #### Getting Data and Statistics
 
 To get an all sales, send a GET request to:
-```https://localhost:{PORT}/api/Sales
-```
+https://localhost:{PORT}/api/Sales
+
 which will return an array of sale objects.  
 
 To get an individual sale, send a GET request to:
-```https://localhost:{PORT}/api/Sales/{SaleId}
-```
+https://localhost:{PORT}/api/Sales/{SaleId}
 which will return the sale object, or a 404 error if the sale is not found.  
 
 To find the number of articles on a given date, send a GET request to:
-```https://localhost:{PORT}/api/Sales/salesByDate/{Date in format: yyyy-mm-dd}
-```
+https://localhost:{PORT}/api/Sales/salesByDate/{Date in format: yyyy-mm-dd}
 which will return the number of sales on that given day.  This will not respond with any data about aformentioned sales.  
 
 To find revenue by date, send a GET request to:
-```https://localhost:{PORT}/api/Sales/revenueByDate/{Date in format: yyyy-mm-dd}
-```
+https://localhost:{PORT}/api/Sales/revenueByDate/{Date in format: yyyy-mm-dd}
 which will respond with the total revenue of that given day.  This will not respond with any data about sales on that date.  
 
 To find all revenue grouped by article number, send a GET request to:
-```https://localhost:{PORT}/api/Sales/revenueByArticle/{ArticleNumber}
-```
+https://localhost:{PORT}/api/Sales/revenueByArticle/{ArticleNumber}
 which will respond with a list of articles and their respective revenues.  
 
 To find revenue by article number, send a GET request to:
-```https://localhost:{PORT}/api/Sales/revenueByArticle/{ArticleNumber}
-```
+https://localhost:{PORT}/api/Sales/revenueByArticle/{ArticleNumber}
 which will respond with the total revenue of that article.
 
 ## Existing Issues
