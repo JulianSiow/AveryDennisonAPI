@@ -1,0 +1,234 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "AveryDennisonAPI",
+    "description" : "API built for AveryDennison Application",
+    "version" : "0.1"
+  },
+  "servers" : [ {
+    "url" : "https://localhost:5001"
+  } ],
+  "paths" : {
+    "/api/Sales/1" : {
+      "put" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"id\":1,\n\t\"Date\":\"2020-01-01\",\n\t\"ArticleNumber\":\"shirt2\",\n\t\"SalesPrice\":5.99\n}"
+                },
+                "1" : {
+                  "value" : "{\n\t\"id\":1,\n\t\"Date\":\"2020-01-01\",\n\t\"ArticleNumber\":\"shirt2\",\n\t\"SalesPrice\":5.99\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "Auto generated using Swagger Inspector"
+          }
+        },
+        "servers" : [ {
+          "url" : "https://localhost:5001"
+        } ]
+      },
+      "delete" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://localhost:5001"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://localhost:5001"
+      } ]
+    },
+    "/api/Sales" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_1"
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"Date\":\"2020-01-01\",\n\t\"ArticleNumber\":\"shirt1\",\n\t\"SalesPrice\":5.99\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://localhost:5001"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://localhost:5001"
+      } ]
+    },
+    "/api/Sales/revenueByArticle" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://localhost:5001"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://localhost:5001"
+      } ]
+    },
+    "/api/Sales/salesByDate/2020-01-01" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://localhost:5001"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://localhost:5001"
+      } ]
+    },
+    "/api/Sales/revenueByDate/2020-01-01" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://localhost:5001"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://localhost:5001"
+      } ]
+    },
+    "/api/Sales/revenueByArticle/shirt1" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://localhost:5001"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://localhost:5001"
+      } ]
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "SalesPrice" : {
+            "type" : "number"
+          },
+          "ArticleNumber" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "Date" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body_1" : {
+        "type" : "object",
+        "properties" : {
+          "SalesPrice" : {
+            "type" : "number"
+          },
+          "ArticleNumber" : {
+            "type" : "string"
+          },
+          "Date" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
