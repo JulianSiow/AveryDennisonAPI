@@ -7,6 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AveryDennisonAPI.Models;
 
+public struct revenueOfArticle
+{
+    public string ArticleNumber { get; set; }
+    public double Revenue { get; set; }
+    public revenueOfArticle(string articleNumber, double revenue)
+    {
+        ArticleNumber = articleNumber;
+        Revenue = revenue;
+    }
+}
+
 namespace AveryDennisonAPI.Controllers
 {
     [Route("api/Sales")]
@@ -29,11 +40,43 @@ namespace AveryDennisonAPI.Controllers
 
         // GET: api/Sales/revenueByArticle
         [HttpGet("revenueByArticle")]
-        public async Task<ActionResult<IEnumerable<Sale>>> GetSalesByArticle()
+        public async Task<ActionResult<List<object>>> GetSalesByArticle()
         {
             var allSales = await _context.Sales.ToListAsync();
 
-            
+            List<string> articles = new List<string>();
+
+            foreach (Sale sale in allSales)
+            {
+                bool alreadyExists = false;
+                foreach (string article in articles)
+                {
+                    if (sale.ArticleNumber == article)
+                    {
+                        alreadyExists = true;
+                    }
+                }
+                if (alreadyExists == false)
+                {
+                    articles.Add(sale.ArticleNumber);
+                }
+            }
+
+            List<object> revenue = new List<object>();
+            foreach (string article in articles)
+            {
+                double articleRevenue = 0.0;
+                foreach (Sale sale in allSales)
+                {
+                    if(article == sale.ArticleNumber)
+                    {
+                        articleRevenue += sale.SalesPrice;
+                    }
+                }
+                revenueOfArticle revenueObject = new revenueOfArticle(article, articleRevenue);
+                revenue.Add(revenueObject);
+            }
+            return revenue;
         }
 
         // GET: api/Sales/5
