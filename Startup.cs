@@ -23,6 +23,12 @@ namespace AveryDennisonAPI
             services.AddDbContext<SaleContext>(opt =>
                 opt.UseInMemoryDatabase("SaleList"));
             services.AddControllers();
+
+            services.AddOpenApiDocument(doc =>
+            {
+                doc.DocumentName = "v1.0";
+                doc.Title = "AD API";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +40,10 @@ namespace AveryDennisonAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseOpenApi();
+
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 
