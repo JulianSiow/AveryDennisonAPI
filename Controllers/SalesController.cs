@@ -7,17 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AveryDennisonAPI.Models;
 
-public struct revenueOfArticle
-{
-    public string ArticleNumber { get; set; }
-    public double Revenue { get; set; }
-    public revenueOfArticle(string articleNumber, double revenue)
-    {
-        ArticleNumber = articleNumber;
-        Revenue = revenue;
-    }
-}
-
 namespace AveryDennisonAPI.Controllers
 {
     [Route("api/Sales")]
@@ -73,7 +62,7 @@ namespace AveryDennisonAPI.Controllers
                         articleRevenue += sale.SalesPrice;
                     }
                 }
-                revenueOfArticle revenueObject = new revenueOfArticle(article, articleRevenue);
+                RevenueOfArticle revenueObject = new RevenueOfArticle(article, articleRevenue);
                 revenue.Add(revenueObject);
             }
             return revenue;
