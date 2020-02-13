@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AveryDennisonAPI.Models;
@@ -29,43 +28,16 @@ namespace AveryDennisonAPI.Controllers
 
         // GET: api/Sales/revenueByArticle
         [HttpGet("revenueByArticle")]
-        public async Task<ActionResult<List<object>>> GetSalesByArticle()
+        public async Task<ActionResult<List<RevenueOfArticle>>> GetSalesByArticle()
         {
             var allSales = await _context.Sales.ToListAsync();
 
-            List<string> articles = new List<string>();
+            var revenues = allSales
+                    .GroupBy(r => r.ArticleNumber)
+                    .Select(g => new RevenueOfArticle(g.Key, g.Sum(s => s.SalesPrice)))
+                    .ToList();
 
-            foreach (Sale sale in allSales)
-            {
-                bool alreadyExists = false;
-                foreach (string article in articles)
-                {
-                    if (sale.ArticleNumber == article)
-                    {
-                        alreadyExists = true;
-                    }
-                }
-                if (alreadyExists == false)
-                {
-                    articles.Add(sale.ArticleNumber);
-                }
-            }
-
-            List<object> revenue = new List<object>();
-            foreach (string article in articles)
-            {
-                double articleRevenue = 0.0;
-                foreach (Sale sale in allSales)
-                {
-                    if(article == sale.ArticleNumber)
-                    {
-                        articleRevenue += sale.SalesPrice;
-                    }
-                }
-                RevenueOfArticle revenueObject = new RevenueOfArticle(article, articleRevenue);
-                revenue.Add(revenueObject);
-            }
-            return revenue;
+            return revenues;
         }
 
         // GET: api/Sales/5
@@ -88,16 +60,9 @@ namespace AveryDennisonAPI.Controllers
         {
             var saleList = await _context.Sales.ToListAsync();
 
-            var filteredSales = saleList.Where(sale => sale.ArticleNumber == articleNumber).ToList();
-
-            var articleRev = 0.0;
-
-            foreach (Sale sale in filteredSales)
-            {
-                articleRev += sale.SalesPrice;
-            }
-
-            return articleRev;
+            return saleList
+                .Where(sale => sale.ArticleNumber == articleNumber)
+                .Sum(sale => sale.SalesPrice);
         }
 
         // GET: api/Sales/revenueByDate/00-00-0000
@@ -106,16 +71,9 @@ namespace AveryDennisonAPI.Controllers
         {
             var saleList = await _context.Sales.ToListAsync();
 
-            var filteredSales = saleList.Where(sale => sale.Date == date).ToList();
-
-            var daysRev = 0.0;
-
-            foreach(Sale sale in filteredSales)
-            {
-                daysRev += sale.SalesPrice;
-            }
-
-            return daysRev;
+            return saleList
+                .Where(sale => sale.Date.Date == date.Date)
+                .Sum(sale => sale.SalesPrice);
         }
 
         // GET: api/Sales/byDate/00-00-0000
@@ -124,9 +82,7 @@ namespace AveryDennisonAPI.Controllers
         {
             var saleList = await _context.Sales.ToListAsync();
 
-            var filteredSales = saleList.Where(sale => sale.Date == date).ToList();
-
-            var daysSales = saleList.Count;
+            var daysSales = saleList.Count(sale => sale.Date.Date == date.Date);
 
             return daysSales;
         }
@@ -152,10 +108,8 @@ namespace AveryDennisonAPI.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return NoContent();
